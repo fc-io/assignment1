@@ -1,33 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import React, { useState } from 'react'
+import beach from './assets/beach.jpeg'
 import './App.css'
 
+function getActiveClassName (activeArticle, currentArticle) {
+  if (activeArticle ===  currentArticle) {
+    return 'show-article'
+  } else {
+    return 'hide-article'
+  }
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeArticle, setActiveArticle] = useState('First Article')
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <>
+      <article className={`active ${getActiveClassName(activeArticle, 'First Article')}`} >
+        <h1>About Me</h1>
+        <p>Fredrik är en frilansande front-end utvecklare med över 10 års erfarenhet av JavaScript och JavaScript-ramverk. Han har tidigare jobbat med bland annat Apple, Google och Sony. Fredrik har tidigare föreläst om webb-programmering för högskolestudenter och hållit i presentationer för olika user groups. Fredrik älskar att testa nya ramverk och bibliotek men har sedan lång tid tillbaka haft React som favorit.</p>
+        <img className='beach' src={beach} alt="" />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque neque nunc, lacinia non sollicitudin ut, congue lobortis nibh. Vivamus interdum elit ac consequat luctus. Etiam a turpis in turpis sagittis dignissim ornare ut tellus. Mauris et accumsan elit. Fusce scelerisque leo a erat tristique, in ornare mauris mollis. Donec hendrerit turpis eleifend vulputate eleifend. Maecenas pretium quis purus vitae luctus.</p>
+      </article>
+      <article className={`active ${getActiveClassName(activeArticle, '2nd Article')}`} >
+          <h1>Idea</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque neque nunc, lacinia non sollicitudin ut, congue lobortis nibh. Vivamus interdum elit ac consequat luctus. Etiam a turpis in turpis sagittis dignissim ornare ut tellus. Mauris et accumsan elit. Fusce scelerisque leo a erat tristique, in ornare mauris mollis. Donec hendrerit turpis eleifend vulputate eleifend. Maecenas pretium quis purus vitae luctus.</p>
+        <img className='beach' src={beach} alt="" />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque neque nunc, lacinia non sollicitudin ut, congue lobortis nibh. Vivamus interdum elit ac consequat luctus. Etiam a turpis in turpis sagittis dignissim ornare ut tellus. Mauris et accumsan elit. Fusce scelerisque leo a erat tristique, in ornare mauris mollis. Donec hendrerit turpis eleifend vulputate eleifend. Maecenas pretium quis purus vitae luctus.</p>
+      </article>
+      <div className='article'>
+        <button onClick={() => {
+          setActiveArticle((a) => {
+            if (a === 'First Article') {
+              return '2nd Article'
+            } else {
+              return 'First Article'
+            }
+          })
+        }}>Switch Article</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    </>
   )
 }
 
